@@ -19,11 +19,14 @@ try {
         Sort-Object Name
 
     if ($GroupMembers) {
-        # Display the sorted members with colored output
+        # Display the sorted members with custom colors in a table-like format
+        Write-Host "`nName                            PrimarySmtpAddress" -ForegroundColor White
+        Write-Host "-------------------------------- --------------------" -ForegroundColor White
         foreach ($Member in $GroupMembers) {
-            Write-Host "$($Member.Name)" -ForegroundColor Green -NoNewline
-            Write-Host " -" -ForegroundColor DarkYellow -NoNewline
-            Write-Host "  $($Member.PrimarySmtpAddress)" -ForegroundColor DarkCyan
+            # Format output with color
+            Write-Host ($Member.Name.PadRight(30)) -ForegroundColor Green -NoNewline
+            Write-Host " " -NoNewline
+            Write-Host ($Member.PrimarySmtpAddress) -ForegroundColor Blue
         }
     } else {
         Write-Host "The group '$GroupName' has no members." -ForegroundColor Yellow
